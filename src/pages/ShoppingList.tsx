@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import GlassCard from '../components/ui-elements/GlassCard';
-import { Magic, Plus, Minus, Store, Tag, Download } from 'lucide-react';
+import { Sparkles, Plus, Minus, Store, Tag, Download } from 'lucide-react';
 
 interface ShoppingItem {
   id: string;
@@ -87,7 +87,7 @@ const ShoppingList = () => {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Button className="flex items-center gap-2">
-                <Magic className="h-4 w-4" />
+                <Sparkles className="h-4 w-4" />
                 <span>Generate Smart List</span>
               </Button>
               <Button variant="outline" className="flex items-center gap-2">
