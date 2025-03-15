@@ -5,6 +5,10 @@ import ItemCard, { InventoryItem } from '../ui-elements/ItemCard';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from "sonner";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import { Form, FormField, FormItem, FormLabel, FormControl } from '@/components/ui/form';
+import { useForm } from 'react-hook-form';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 // Sample data for demonstration
 const sampleInventoryItems: InventoryItem[] = [
@@ -102,12 +106,45 @@ const statuses = [
   'Expired',
 ];
 
+type NewItemFormValues = {
+  name: string;
+  category: string;
+  quantity: number;
+  unit: string;
+  purchaseDate: string;
+  expiryDate: string;
+};
+
 const InventoryList = () => {
   const [inventoryItems, setInventoryItems] = useState(sampleInventoryItems);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
   const [selectedStatus, setSelectedStatus] = useState('All Status');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [addItemDialogOpen, setAddItemDialogOpen] = useState(false);
+  
+  const newItemForm = useForm<NewItemFormValues>({
+    defaultValues: {
+      name: '',
+      category: 'Dairy',
+      quantity: 1,
+      unit: 'count',
+      purchaseDate: new Date().toISOString().split('T')[0],
+      expiryDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    }
+  });
+  
+  const handleAddItem = (data: NewItemFormValues) => {
+    const newItem: InventoryItem = {
+      id: `${Date.now()}`,
+      ...data
+    };
+    
+    setInventoryItems([newItem, ...inventoryItems]);
+    setAddItemDialogOpen(false);
+    newItemForm.reset();
+    toast.success("Item added successfully");
+  };
   
   const handleEdit = (id: string, updatedItem: Partial<InventoryItem>) => {
     const updatedItems = inventoryItems.map(item => 
@@ -175,7 +212,7 @@ const InventoryList = () => {
   });
 
   return (
-    <div className="animate-slide-in">
+    <div className="animate-in fade-in slide-in-from-bottom-8 duration-500">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <div className="relative w-full md:w-64">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
@@ -229,7 +266,7 @@ const InventoryList = () => {
             </button>
           </div>
           
-          <Button className="flex items-center gap-2">
+          <Button className="flex items-center gap-2" onClick={() => setAddItemDialogOpen(true)}>
             <Plus className="h-4 w-4" />
             <span>Add Item</span>
           </Button>
@@ -254,6 +291,99 @@ const InventoryList = () => {
           <p className="text-muted-foreground">No items found. Try adjusting your filters or add new items.</p>
         </div>
       )}
+      
+      {/* Add Item Dialog */}
+      <Dialog open={addItemDialogOpen} onOpenChange={setAddItemDialogOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Add New Item</DialogTitle>
+          </DialogHeader>
+          
+          <form onSubmit={newItemForm.handleSubmit(handleAddItem)} className="space-y-4 py-4">
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input
+                  {...newItemForm.register('name')}
+                  placeholder="Item name"
+                  required
+                />
+              </FormControl>
+            </FormItem>
+            
+            <FormItem>
+              <FormLabel>Category</FormLabel>
+              <Select
+                onValueChange={(value) => newItemForm.setValue('category', value)}
+                defaultValue={newItemForm.getValues('category')}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.filter(c => c !== 'All Categories').map(category => (
+                    <SelectItem key={category} value={category}>{category}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </FormItem>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <FormItem>
+                <FormLabel>Quantity</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    {...newItemForm.register('quantity', { valueAsNumber: true })}
+                    min="0"
+                    step="0.1"
+                    required
+                  />
+                </FormControl>
+              </FormItem>
+              <FormItem>
+                <FormLabel>Unit</FormLabel>
+                <FormControl>
+                  <Input
+                    {...newItemForm.register('unit')}
+                    placeholder="e.g., lbs, oz, count"
+                    required
+                  />
+                </FormControl>
+              </FormItem>
+            </div>
+            
+            <FormItem>
+              <FormLabel>Purchase Date</FormLabel>
+              <FormControl>
+                <Input
+                  type="date"
+                  {...newItemForm.register('purchaseDate')}
+                  required
+                />
+              </FormControl>
+            </FormItem>
+            
+            <FormItem>
+              <FormLabel>Expiry Date</FormLabel>
+              <FormControl>
+                <Input
+                  type="date"
+                  {...newItemForm.register('expiryDate')}
+                  required
+                />
+              </FormControl>
+            </FormItem>
+            
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={() => setAddItemDialogOpen(false)}>
+                Cancel
+              </Button>
+              <Button type="submit">Add Item</Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
