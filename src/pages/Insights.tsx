@@ -110,7 +110,7 @@ const Insights = () => {
           <div className="h-[300px]">
             <ChartContainer
               config={{
-                amount: { theme: { light: "#3b82f6" } },
+                amount: { theme: { light: "#3b82f6", dark: "#60a5fa" } },
               }}
             >
               <BarChart data={weeklySpendData}>
@@ -136,7 +136,7 @@ const Insights = () => {
           <div className="h-[300px]">
             <ChartContainer
               config={{
-                amount: { theme: { light: "#8b5cf6" } },
+                amount: { theme: { light: "#8b5cf6", dark: "#a78bfa" } },
               }}
             >
               <BarChart data={categorySpendData} layout="vertical">
