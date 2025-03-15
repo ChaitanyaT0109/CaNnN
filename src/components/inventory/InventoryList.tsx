@@ -1,9 +1,10 @@
 
 import React, { useState } from 'react';
-import { Search, Filter, Plus } from 'lucide-react';
+import { Search, Filter, Plus, Grid, List } from 'lucide-react';
 import ItemCard, { InventoryItem } from '../ui-elements/ItemCard';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { toast } from "sonner";
 
 // Sample data for demonstration
 const sampleInventoryItems: InventoryItem[] = [
@@ -82,7 +83,7 @@ const sampleInventoryItems: InventoryItem[] = [
 ];
 
 const categories = [
-  'All',
+  'All Categories',
   'Dairy',
   'Fruits',
   'Vegetables',
@@ -94,25 +95,83 @@ const categories = [
   'Beverages'
 ];
 
+const statuses = [
+  'All Status',
+  'Fresh',
+  'Expiring Soon',
+  'Expired',
+];
+
 const InventoryList = () => {
+  const [inventoryItems, setInventoryItems] = useState(sampleInventoryItems);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState('All Categories');
+  const [selectedStatus, setSelectedStatus] = useState('All Status');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   
-  const handleEdit = (id: string) => {
-    console.log('Edit item', id);
-    // Implementation for editing would go here
+  const handleEdit = (id: string, updatedItem: Partial<InventoryItem>) => {
+    const updatedItems = inventoryItems.map(item => 
+      item.id === id ? { ...item, ...updatedItem } : item
+    );
+    setInventoryItems(updatedItems);
+    toast.success("Item updated successfully");
   };
   
   const handleDelete = (id: string) => {
-    console.log('Delete item', id);
-    // Implementation for deleting would go here
+    const updatedItems = inventoryItems.filter(item => item.id !== id);
+    setInventoryItems(updatedItems);
+    toast.success("Item deleted successfully");
   };
   
-  // Filter items based on search term and category
-  const filteredItems = sampleInventoryItems.filter(item => {
+  const handleAddToShoppingList = (id: string) => {
+    // Implementation would connect to shopping list functionality
+    const item = inventoryItems.find(item => item.id === id);
+    if (item) {
+      toast.success(`${item.name} added to shopping list`);
+    }
+  };
+  
+  const handleLogConsumption = (id: string, amount: number) => {
+    const updatedItems = inventoryItems.map(item => {
+      if (item.id === id) {
+        const updatedQuantity = Math.max(0, item.quantity - amount);
+        return {
+          ...item,
+          quantity: updatedQuantity
+        };
+      }
+      return item;
+    });
+    
+    setInventoryItems(updatedItems);
+    toast.success("Consumption logged successfully");
+  };
+  
+  // Filter items based on search term, category, and status
+  const filteredItems = inventoryItems.filter(item => {
     const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+    const matchesCategory = selectedCategory === 'All Categories' || item.category === selectedCategory;
+    
+    let matchesStatus = true;
+    if (selectedStatus !== 'All Status') {
+      const today = new Date();
+      const expiryDate = new Date(item.expiryDate);
+      const daysUntilExpiry = Math.ceil(
+        (expiryDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+      );
+      
+      if (selectedStatus === 'Fresh' && daysUntilExpiry > 7) {
+        matchesStatus = true;
+      } else if (selectedStatus === 'Expiring Soon' && daysUntilExpiry >= 0 && daysUntilExpiry <= 7) {
+        matchesStatus = true;
+      } else if (selectedStatus === 'Expired' && daysUntilExpiry < 0) {
+        matchesStatus = true;
+      } else {
+        matchesStatus = false;
+      }
+    }
+    
+    return matchesSearch && matchesCategory && matchesStatus;
   });
 
   return (
@@ -143,6 +202,33 @@ const InventoryList = () => {
             </select>
           </div>
           
+          <select 
+            className="h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 w-full md:w-36"
+            value={selectedStatus}
+            onChange={(e) => setSelectedStatus(e.target.value)}
+          >
+            {statuses.map(status => (
+              <option key={status} value={status}>{status}</option>
+            ))}
+          </select>
+          
+          <div className="flex border rounded-md overflow-hidden">
+            <button 
+              className={`px-3 py-2 ${viewMode === 'grid' ? 'bg-primary text-white' : 'bg-background'}`}
+              onClick={() => setViewMode('grid')}
+              aria-label="Grid view"
+            >
+              <Grid className="h-5 w-5" />
+            </button>
+            <button 
+              className={`px-3 py-2 ${viewMode === 'list' ? 'bg-primary text-white' : 'bg-background'}`}
+              onClick={() => setViewMode('list')}
+              aria-label="List view"
+            >
+              <List className="h-5 w-5" />
+            </button>
+          </div>
+          
           <Button className="flex items-center gap-2">
             <Plus className="h-4 w-4" />
             <span>Add Item</span>
@@ -150,13 +236,15 @@ const InventoryList = () => {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className={viewMode === 'grid' ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" : "space-y-4"}>
         {filteredItems.map(item => (
           <ItemCard 
             key={item.id} 
             item={item} 
             onEdit={handleEdit}
             onDelete={handleDelete}
+            onAddToShoppingList={handleAddToShoppingList}
+            onLogConsumption={handleLogConsumption}
           />
         ))}
       </div>
