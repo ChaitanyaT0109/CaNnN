@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Inventory from "./pages/Inventory";
 import ShoppingList from "./pages/ShoppingList";
 import MealPlanning from "./pages/MealPlanning";
+import Insights from "./pages/Insights";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
@@ -28,7 +29,7 @@ const App = () => (
             <Route path="/shopping-list" element={<ShoppingList />} />
             <Route path="/meal-planning" element={<MealPlanning />} />
             <Route path="/expiry-tracking" element={<Dashboard />} /> {/* Placeholder for now */}
-            <Route path="/insights" element={<Dashboard />} /> {/* Placeholder for now */}
+            <Route path="/insights" element={<Insights />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
           <Route path="*" element={<NotFound />} />
