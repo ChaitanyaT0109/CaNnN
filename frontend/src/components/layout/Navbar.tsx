@@ -9,7 +9,6 @@ const Navbar = () => {
     { path: '/inventory', name: 'Inventory', icon: <Package className="w-5 h-5" /> },
     { path: '/shopping-list', name: 'Shopping List', icon: <ShoppingCart className="w-5 h-5" /> },
     { path: '/meal-planning', name: 'Meal Planning', icon: <Calendar className="w-5 h-5" /> },
-    { path: '/expiry-tracking', name: 'Expiry Tracking', icon: <Clock className="w-5 h-5" /> },
     { path: '/insights', name: 'Insights', icon: <BarChart className="w-5 h-5" /> },
     { path: '/settings', name: 'Settings', icon: <Settings className="w-5 h-5" /> },
   ];
