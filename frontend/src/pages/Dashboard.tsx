@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DashboardStats from '../components/dashboard/DashboardStats';
 import GlassCard from '../components/ui-elements/GlassCard';
 import { Button } from '@/components/ui/button';
-import { ShoppingCart, Calendar, Lightbulb, Plus, ArrowRight, Moon, Sun, Trash, Edit, Check, MoreVertical } from 'lucide-react';
+import { Lightbulb, Plus, ArrowRight, Moon, Sun, Trash, Edit, Check, MoreVertical } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -17,16 +17,26 @@ import {
   DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu';
 
-// Define InventoryItem interface
+// Define InventoryItem interface to match your MongoDB schema
 export interface InventoryItem {
-  id: string;
+  _id: string;
   name: string;
   category: string;
   quantity: number;
   unit: string;
-  purchaseDate: string;
+  boughtDate: string;
   expiryDate: string;
   price?: number;
+}
+
+// Updated DashboardStats interface to use real data
+interface DashboardMetrics {
+  runningLowCount: number;
+  expiringSoonCount: number;
+  weeklySpend: number;
+  wasteScore: number;
+  previousWeekSpend: number;
+  previousWasteScore: number;
 }
 
 // ItemCard component integrated directly
@@ -93,7 +103,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, onEdit, onDelete, onConsume }
               </DropdownMenuItem>
             )}
             {onDelete && (
-              <DropdownMenuItem onClick={() => onDelete(item.id)}>
+              <DropdownMenuItem onClick={() => onDelete(item._id)}>
                 <Trash className="h-4 w-4 mr-2" /> Delete
               </DropdownMenuItem>
             )}
@@ -116,7 +126,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, onEdit, onDelete, onConsume }
         
         <div className="flex justify-between">
           <span className="text-sm text-muted-foreground">Purchased</span>
-          <span className="text-sm">{formatDate(item.purchaseDate)}</span>
+          <span className="text-sm">{formatDate(item.boughtDate)}</span>
         </div>
         
         <div className="flex justify-between">
@@ -132,59 +142,6 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, onEdit, onDelete, onConsume }
   );
 };
 
-// Sample data for demonstration
-const initialExpiringItems: InventoryItem[] = [
-  {
-    id: '4',
-    name: 'Chicken Breast',
-    category: 'Meat',
-    quantity: 2,
-    unit: 'kg',
-    purchaseDate: '2023-08-03',
-    expiryDate: '2023-08-06',
-    price: 320,
-  },
-  {
-    id: '5',
-    name: 'Spinach',
-    category: 'Vegetables',
-    quantity: 1,
-    unit: 'bunch',
-    purchaseDate: '2023-08-02',
-    expiryDate: '2023-08-05',
-    price: 40,
-  },
-  {
-    id: '6',
-    name: 'Bread',
-    category: 'Bakery',
-    quantity: 1,
-    unit: 'pack',
-    purchaseDate: '2023-08-01',
-    expiryDate: '2023-08-07',
-    price: 50,
-  }
-];
-
-const initialShoppingList = [
-  { id: '1', name: 'Milk', quantity: 1, unit: 'L', price: 70 },
-  { id: '2', name: 'Bananas', quantity: 6, unit: 'count', price: 60 },
-  { id: '3', name: 'Greek Yogurt', quantity: 2, unit: 'cups', price: 90 }
-];
-
-const initialMealPlan = [
-  { id: '1', day: 'Monday', meal: 'Pasta Primavera' },
-  { id: '2', day: 'Tuesday', meal: 'Chicken Stir Fry' },
-  { id: '3', day: 'Wednesday', meal: 'Fish Tacos' }
-];
-
-const recommendations = [
-  "Use spinach within 2 days to avoid waste",
-  "Buy milk soon, you're almost out",
-  "Consider freezing bread to extend freshness",
-  "There are enough ingredients for pasta tonight"
-];
-
 // Category options for Indian context
 const categoryOptions = [
   "Vegetables", "Fruits", "Dairy", "Grains", "Pulses", "Spices", 
@@ -197,9 +154,21 @@ const unitOptions = [
 ];
 
 const Dashboard = () => {
-  const [expiringItems, setExpiringItems] = useState<InventoryItem[]>(initialExpiringItems);
-  const [shoppingList, setShoppingList] = useState(initialShoppingList);
-  const [mealPlan, setMealPlan] = useState(initialMealPlan);
+  // State for inventory data
+  const [inventory, setInventory] = useState<InventoryItem[]>([]);
+  const [expiringItems, setExpiringItems] = useState<InventoryItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [dashboardMetrics, setDashboardMetrics] = useState<DashboardMetrics>({
+    runningLowCount: 0,
+    expiringSoonCount: 0,
+    weeklySpend: 0,
+    wasteScore: 0,
+    previousWeekSpend: 0,
+    previousWasteScore: 0
+  });
+  
+  const [recommendations, setRecommendations] = useState<string[]>([]);
   
   // Dialog states
   const [addItemDialogOpen, setAddItemDialogOpen] = useState(false);
@@ -208,12 +177,12 @@ const Dashboard = () => {
   const [currentItem, setCurrentItem] = useState<InventoryItem | null>(null);
   
   // New item form state
-  const [newItem, setNewItem] = useState<Omit<InventoryItem, 'id'>>({
+  const [newItem, setNewItem] = useState<Omit<InventoryItem, '_id'>>({
     name: '',
     category: 'Vegetables',
     quantity: 1,
     unit: 'kg',
-    purchaseDate: new Date().toISOString().split('T')[0],
+    boughtDate: new Date().toISOString().split('T')[0],
     expiryDate: '',
     price: 0
   });
@@ -224,25 +193,182 @@ const Dashboard = () => {
   const { theme, setTheme } = useTheme();
   const { toast } = useToast();
 
+  // Fetch inventory data from API
+  useEffect(() => {
+    const fetchInventory = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('http://localhost:5000/api/v1/foods');
+        if (!response.ok) {
+          throw new Error('Failed to fetch inventory data');
+        }
+        const data = await response.json();
+        
+        setInventory(data);
+        
+        // Process data for dashboard metrics
+        processInventoryData(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An unknown error occurred');
+        console.error('Error fetching inventory:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInventory();
+  }, []);
+
+  // Process inventory data to calculate dashboard metrics and expiring items
+  const processInventoryData = (data: InventoryItem[]) => {
+    const now = new Date();
+    
+    // Filter items expiring soon (within 7 days)
+    const expiring = data.filter(item => {
+      const expiryDate = parseISO(item.expiryDate);
+      const daysLeft = differenceInDays(expiryDate, now);
+      return daysLeft >= 0 && daysLeft <= 7; // Not expired yet but close to expiry
+    });
+    
+    // Sort by days left until expiry
+    expiring.sort((a, b) => {
+      const daysA = differenceInDays(parseISO(a.expiryDate), now);
+      const daysB = differenceInDays(parseISO(b.expiryDate), now);
+      return daysA - daysB;
+    });
+    
+    setExpiringItems(expiring);
+    
+    // Count items running low (arbitrary threshold - could be customized per item in real app)
+    const runningLow = data.filter(item => item.quantity <= 1).length;
+    
+    // Calculate weekly spend (mock calculation - would be more sophisticated in real app)
+    const weeklySpend = data.reduce((total, item) => {
+      const boughtDate = parseISO(item.boughtDate);
+      const daysSincePurchase = differenceInDays(now, boughtDate);
+      // Include only items bought in the last 7 days
+      if (daysSincePurchase <= 7) {
+        return total + (item.price || 0);
+      }
+      return total;
+    }, 0);
+    
+    // Mock data for previous week's spend and waste score
+    const prevWeekSpend = weeklySpend * 1.12; // Assume 12% higher last week
+    
+    // Calculate waste score based on expired items
+    const expiredItems = data.filter(item => {
+      const expiryDate = parseISO(item.expiryDate);
+      return differenceInDays(expiryDate, now) < 0;
+    }).length;
+    
+    // Mock waste score calculation (0-10 scale, lower is better)
+    const wasteScore = 10 - Math.min(10, Math.max(0, 10 - expiredItems));
+    const prevWasteScore = wasteScore * 0.95; // Slightly worse last week
+    
+    // Update dashboard metrics
+    setDashboardMetrics({
+      runningLowCount: runningLow,
+      expiringSoonCount: expiring.length,
+      weeklySpend,
+      wasteScore,
+      previousWeekSpend: prevWeekSpend,
+      previousWasteScore: prevWasteScore
+    });
+    
+    // Generate AI recommendations based on inventory
+    generateRecommendations(data, expiring);
+  };
+  
+  // Generate recommendations based on inventory data
+  const generateRecommendations = (inventory: InventoryItem[], expiringItems: InventoryItem[]) => {
+    const recommendations: string[] = [];
+    
+    // Add recommendations for items expiring soon
+    expiringItems.forEach(item => {
+      const daysLeft = differenceInDays(parseISO(item.expiryDate), new Date());
+      if (daysLeft <= 2) {
+        recommendations.push(`Use ${item.name.toLowerCase()} within ${daysLeft} days to avoid waste`);
+      }
+    });
+    
+    // Add recommendations for low items
+    inventory.forEach(item => {
+      if (item.quantity <= 1 && item.category === 'Dairy') {
+        recommendations.push(`Buy ${item.name.toLowerCase()} soon, you're almost out`);
+      }
+    });
+    
+    // Add general recommendations
+    if (inventory.some(item => item.category === 'Bakery')) {
+      recommendations.push(`Consider freezing bread to extend freshness`);
+    }
+    
+    // Check if there are ingredients for common meals
+    if (inventory.some(item => item.category === 'Grains') && 
+        inventory.some(item => item.category === 'Vegetables')) {
+      recommendations.push(`There are enough ingredients for pasta tonight`);
+    }
+    
+    // Take only up to 4 recommendations
+    setRecommendations(recommendations.slice(0, 4));
+  };
+
   // Add new item handler
-  const handleAddItem = () => {
-    const id = Date.now().toString();
-    const itemToAdd = { id, ...newItem };
-    setExpiringItems([...expiringItems, itemToAdd]);
-    setAddItemDialogOpen(false);
-    setNewItem({
-      name: '',
-      category: 'Vegetables',
-      quantity: 1,
-      unit: 'kg',
-      purchaseDate: new Date().toISOString().split('T')[0],
-      expiryDate: '',
-      price: 0
-    });
-    toast({
-      title: "Item Added",
-      description: `${newItem.name} has been added to your inventory.`,
-    });
+  const handleAddItem = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/v1/foods', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: newItem.name,
+          category: newItem.category,
+          quantity: newItem.quantity,
+          unit: newItem.unit,
+          boughtDate: newItem.boughtDate,
+          expiryDate: newItem.expiryDate,
+          price: newItem.price
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to add item');
+      }
+      
+      const addedItem = await response.json();
+      
+      // Update local state
+      setInventory([...inventory, addedItem]);
+      
+      // Recalculate expiring items and metrics
+      processInventoryData([...inventory, addedItem]);
+      
+      // Reset form and close dialog
+      setAddItemDialogOpen(false);
+      setNewItem({
+        name: '',
+        category: 'Vegetables',
+        quantity: 1,
+        unit: 'kg',
+        boughtDate: new Date().toISOString().split('T')[0],
+        expiryDate: '',
+        price: 0
+      });
+      
+      toast({
+        title: "Item Added",
+        description: `${newItem.name} has been added to your inventory.`,
+      });
+    } catch (err) {
+      console.error('Error adding item:', err);
+      toast({
+        title: "Error",
+        description: "Failed to add item. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   // Edit item handlers
@@ -251,32 +377,90 @@ const Dashboard = () => {
     setEditItemDialogOpen(true);
   };
 
-  const handleEditItem = () => {
+  const handleEditItem = async () => {
     if (!currentItem) return;
     
-    const updatedItems = expiringItems.map(item => 
-      item.id === currentItem.id ? currentItem : item
-    );
-    
-    setExpiringItems(updatedItems);
-    setEditItemDialogOpen(false);
-    setCurrentItem(null);
-    
-    toast({
-      title: "Item Updated",
-      description: `${currentItem.name} has been updated.`,
-    });
+    try {
+      const response = await fetch(`http://localhost:5000/api/v1/foods/${currentItem._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: currentItem.name,
+          category: currentItem.category,
+          quantity: currentItem.quantity,
+          unit: currentItem.unit,
+          boughtDate: currentItem.boughtDate,
+          expiryDate: currentItem.expiryDate,
+          price: currentItem.price
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to update item');
+      }
+      
+      const updatedItem = await response.json();
+      
+      // Update local state
+      const updatedInventory = inventory.map(item => 
+        item._id === currentItem._id ? updatedItem : item
+      );
+      
+      setInventory(updatedInventory);
+      
+      // Recalculate expiring items and metrics
+      processInventoryData(updatedInventory);
+      
+      // Close dialog and reset current item
+      setEditItemDialogOpen(false);
+      setCurrentItem(null);
+      
+      toast({
+        title: "Item Updated",
+        description: `${currentItem.name} has been updated.`,
+      });
+    } catch (err) {
+      console.error('Error updating item:', err);
+      toast({
+        title: "Error",
+        description: "Failed to update item. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   // Delete item handler
-  const handleDeleteItem = (id: string) => {
-    const updatedItems = expiringItems.filter(item => item.id !== id);
-    setExpiringItems(updatedItems);
-    
-    toast({
-      title: "Item Deleted",
-      description: "The item has been removed from your inventory.",
-    });
+  const handleDeleteItem = async (id: string) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/v1/foods/${id}`, {
+        method: 'DELETE',
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to delete item');
+      }
+      
+      // Update local state
+      const updatedInventory = inventory.filter(item => item._id !== id);
+      setInventory(updatedInventory);
+      
+      // Recalculate expiring items and metrics
+      processInventoryData(updatedInventory);
+      
+      toast({
+        title: "Item Deleted",
+        description: "The item has been removed from your inventory.",
+      });
+    } catch (err) {
+      console.error('Error deleting item:', err);
+      toast({
+        title: "Error",
+        description: "Failed to delete item. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   // Consume item handlers
@@ -286,45 +470,89 @@ const Dashboard = () => {
     setConsumeDialogOpen(true);
   };
 
-  const handleConsumeItem = () => {
+  const handleConsumeItem = async () => {
     if (!currentItem) return;
     
-    const updatedItems = expiringItems.map(item => {
-      if (item.id === currentItem.id) {
-        const newQuantity = item.quantity - consumeAmount;
-        if (newQuantity <= 0) {
-          return null; // Mark for removal
+    try {
+      const newQuantity = currentItem.quantity - consumeAmount;
+      
+      if (newQuantity <= 0) {
+        // If quantity becomes zero or negative, delete the item
+        await handleDeleteItem(currentItem._id);
+      } else {
+        // Otherwise update the quantity
+        const response = await fetch(`http://localhost:5000/api/v1/foods/${currentItem._id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...currentItem,
+            quantity: newQuantity
+          }),
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to update item quantity');
         }
-        return { ...item, quantity: newQuantity };
+        
+        const updatedItem = await response.json();
+        
+        // Update local state
+        const updatedInventory = inventory.map(item => 
+          item._id === currentItem._id ? updatedItem : item
+        );
+        
+        setInventory(updatedInventory);
+        
+        // Recalculate expiring items and metrics
+        processInventoryData(updatedInventory);
       }
-      return item;
-    }).filter(Boolean) as InventoryItem[]; // Remove nulls
-    
-    setExpiringItems(updatedItems);
-    setConsumeDialogOpen(false);
-    setCurrentItem(null);
-    
-    toast({
-      title: "Consumption Logged",
-      description: `Consumed ${consumeAmount} ${currentItem.unit} of ${currentItem.name}.`,
-    });
-  };
-
-  // Shopping list handlers
-  const handleDeleteShoppingItem = (id: string) => {
-    const updatedItems = shoppingList.filter(item => item.id !== id);
-    setShoppingList(updatedItems);
-    
-    toast({
-      title: "Item Removed",
-      description: "The item has been removed from your shopping list.",
-    });
+      
+      // Close dialog and reset current item
+      setConsumeDialogOpen(false);
+      setCurrentItem(null);
+      
+      toast({
+        title: "Consumption Logged",
+        description: `Consumed ${consumeAmount} ${currentItem.unit} of ${currentItem.name}.`,
+      });
+    } catch (err) {
+      console.error('Error consuming item:', err);
+      toast({
+        title: "Error",
+        description: "Failed to log consumption. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   // Theme toggle handler
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
+  
+  // Render loading state
+  if (loading) {
+    return (
+      <div className="page-container flex items-center justify-center h-96">
+        <p>Loading inventory data...</p>
+      </div>
+    );
+  }
+  
+  // Render error state
+  if (error) {
+    return (
+      <div className="page-container">
+        <h1 className="page-title">Dashboard</h1>
+        <div className="bg-red-100 text-red-800 p-4 rounded-lg mt-4">
+          <p>Error loading inventory: {error}</p>
+          <Button className="mt-2" onClick={() => window.location.reload()}>Retry</Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="page-container">
@@ -335,32 +563,57 @@ const Dashboard = () => {
         </Button>
       </div>
       
-      <DashboardStats />
+      {/* Dashboard Stats - Pass real data */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+        <GlassCard>
+          <h3 className="text-sm text-muted-foreground">Items Running Low</h3>
+          <p className="text-3xl font-bold mt-2">{dashboardMetrics.runningLowCount}</p>
+          <p className="text-xs text-muted-foreground mt-1">Items below threshold</p>
+        </GlassCard>
+        
+        <GlassCard>
+          <h3 className="text-sm text-muted-foreground">Expiring Soon</h3>
+          <p className="text-3xl font-bold mt-2">{dashboardMetrics.expiringSoonCount}</p>
+          <p className="text-xs text-muted-foreground mt-1">Items expiring this week</p>
+        </GlassCard>
+        
+        <GlassCard>
+          <h3 className="text-sm text-muted-foreground">Weekly Grocery Spend</h3>
+          <p className="text-3xl font-bold mt-2">₹{dashboardMetrics.weeklySpend.toFixed(2)}</p>
+          <p className="text-xs text-red-500 mt-1">
+            ↓ {Math.abs(((dashboardMetrics.weeklySpend - dashboardMetrics.previousWeekSpend) / dashboardMetrics.previousWeekSpend) * 100).toFixed(0)}% vs last week
+          </p>
+        </GlassCard>
+        
+        <GlassCard>
+          <h3 className="text-sm text-muted-foreground">Food Waste Score</h3>
+          <p className="text-3xl font-bold mt-2">{dashboardMetrics.wasteScore.toFixed(1)}/10</p>
+          <p className="text-xs text-green-500 mt-1">
+            Better than last week
+          </p>
+        </GlassCard>
+      </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
         <div className="lg:col-span-2">
           <h2 className="section-title">Expiring Soon</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {expiringItems.map(item => (
-              <ItemCard 
-                key={item.id} 
-                item={item} 
-                onEdit={() => openEditDialog(item)}
-                onDelete={() => handleDeleteItem(item.id)}
-                onConsume={() => openConsumeDialog(item)}
-              />
-            ))}
-            <div className="flex items-center justify-center">
-              <Button 
-                variant="outline" 
-                className="flex items-center gap-2 w-full h-full min-h-[120px]"
-                onClick={() => setAddItemDialogOpen(true)}
-              >
-                <Plus className="h-5 w-5" />
-                <span>Add New Item</span>
-              </Button>
+          {expiringItems.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {expiringItems.map(item => (
+                <ItemCard 
+                  key={item._id} 
+                  item={item} 
+                  onEdit={() => openEditDialog(item)}
+                  onDelete={() => handleDeleteItem(item._id)}
+                  onConsume={() => openConsumeDialog(item)}
+                />
+              ))}
             </div>
-          </div>
+          ) : (
+            <div className="bg-secondary p-6 rounded-lg text-center">
+              <p>No items expiring soon</p>
+            </div>
+          )}
         </div>
         
         <div>
@@ -370,71 +623,21 @@ const Dashboard = () => {
               <Lightbulb className="h-5 w-5 text-primary" />
               <h3 className="font-medium">Smart Suggestions</h3>
             </div>
-            <ul className="space-y-3">
-              {recommendations.map((recommendation, index) => (
-                <li key={index} className="bg-secondary rounded-lg p-3 text-sm">
-                  {recommendation}
-                </li>
-              ))}
-            </ul>
+            {recommendations.length > 0 ? (
+              <ul className="space-y-3">
+                {recommendations.map((recommendation, index) => (
+                  <li key={index} className="bg-secondary rounded-lg p-3 text-sm">
+                    {recommendation}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-sm text-muted-foreground">
+                Add more items to your inventory to get personalized recommendations.
+              </p>
+            )}
           </GlassCard>
         </div>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-        <GlassCard>
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="font-medium">Shopping List</h2>
-            <Button variant="ghost" size="sm" className="flex items-center gap-1 text-xs">
-              View All <ArrowRight className="h-3 w-3" />
-            </Button>
-          </div>
-          <div className="space-y-2">
-            {shoppingList.map(item => (
-              <div key={item.id} className="flex justify-between items-center p-2 bg-secondary rounded-lg">
-                <span>{item.name}</span>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-muted-foreground">
-                    {item.quantity} {item.unit} · ₹{item.price}
-                  </span>
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    className="h-6 w-6"
-                    onClick={() => handleDeleteShoppingItem(item.id)}
-                  >
-                    <Trash className="h-3 w-3" />
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-          <Button className="w-full mt-4 flex items-center justify-center gap-2">
-            <ShoppingCart className="h-4 w-4" />
-            <span>Go to Shopping List</span>
-          </Button>
-        </GlassCard>
-        
-        <GlassCard>
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="font-medium">Meal Plan</h2>
-            <Button variant="ghost" size="sm" className="flex items-center gap-1 text-xs">
-              View All <ArrowRight className="h-3 w-3" />
-            </Button>
-          </div>
-          <div className="space-y-2">
-            {mealPlan.map(day => (
-              <div key={day.id} className="flex justify-between items-center p-2 bg-secondary rounded-lg">
-                <span>{day.day}</span>
-                <span className="text-sm text-muted-foreground">{day.meal}</span>
-              </div>
-            ))}
-          </div>
-          <Button className="w-full mt-4 flex items-center justify-center gap-2">
-            <Calendar className="h-4 w-4" />
-            <span>Go to Meal Planning</span>
-          </Button>
-        </GlassCard>
       </div>
 
       {/* Add Item Dialog */}
@@ -464,8 +667,10 @@ const Dashboard = () => {
                   <SelectValue placeholder="Select category" />
                 </SelectTrigger>
                 <SelectContent>
-                  {categoryOptions.map(category => (
-                    <SelectItem key={category} value={category}>{category}</SelectItem>
+                  {categoryOptions.map((category) => (
+                    <SelectItem key={category} value={category}>
+                      {category}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -476,11 +681,11 @@ const Dashboard = () => {
               <Input
                 id="quantity"
                 type="number"
+                value={newItem.quantity}
+                onChange={(e) => setNewItem({...newItem, quantity: Number(e.target.value)})}
+                className="col-span-3"
                 min="0"
                 step="0.1"
-                value={newItem.quantity}
-                onChange={(e) => setNewItem({...newItem, quantity: parseFloat(e.target.value) || 0})}
-                className="col-span-3"
               />
             </div>
             
@@ -494,8 +699,10 @@ const Dashboard = () => {
                   <SelectValue placeholder="Select unit" />
                 </SelectTrigger>
                 <SelectContent>
-                  {unitOptions.map(unit => (
-                    <SelectItem key={unit} value={unit}>{unit}</SelectItem>
+                  {unitOptions.map((unit) => (
+                    <SelectItem key={unit} value={unit}>
+                      {unit}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -506,29 +713,29 @@ const Dashboard = () => {
               <Input
                 id="price"
                 type="number"
+                value={newItem.price || ''}
+                onChange={(e) => setNewItem({...newItem, price: Number(e.target.value)})}
+                className="col-span-3"
                 min="0"
-                step="1"
-                value={newItem.price}
-                onChange={(e) => setNewItem({...newItem, price: parseFloat(e.target.value) || 0})}
-                className="col-span-3"
+                step="0.01"
               />
             </div>
             
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="purchase-date" className="text-right">Purchased</Label>
+              <Label htmlFor="boughtDate" className="text-right">Bought Date</Label>
               <Input
-                id="purchase-date"
+                id="boughtDate"
                 type="date"
-                value={newItem.purchaseDate}
-                onChange={(e) => setNewItem({...newItem, purchaseDate: e.target.value})}
+                value={newItem.boughtDate}
+                onChange={(e) => setNewItem({...newItem, boughtDate: e.target.value})}
                 className="col-span-3"
               />
             </div>
             
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="expiry-date" className="text-right">Expires</Label>
+              <Label htmlFor="expiryDate" className="text-right">Expiry Date</Label>
               <Input
-                id="expiry-date"
+                id="expiryDate"
                 type="date"
                 value={newItem.expiryDate}
                 onChange={(e) => setNewItem({...newItem, expiryDate: e.target.value})}
@@ -538,7 +745,7 @@ const Dashboard = () => {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setAddItemDialogOpen(false)}>Cancel</Button>
-            <Button onClick={handleAddItem}>Add Item</Button>
+            <Button onClick={handleAddItem} disabled={!newItem.name || !newItem.expiryDate}>Add Item</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -571,8 +778,10 @@ const Dashboard = () => {
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                   <SelectContent>
-                    {categoryOptions.map(category => (
-                      <SelectItem key={category} value={category}>{category}</SelectItem>
+                    {categoryOptions.map((category) => (
+                      <SelectItem key={category} value={category}>
+                        {category}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -583,11 +792,11 @@ const Dashboard = () => {
                 <Input
                   id="edit-quantity"
                   type="number"
+                  value={currentItem.quantity}
+                  onChange={(e) => setCurrentItem({...currentItem, quantity: Number(e.target.value)})}
+                  className="col-span-3"
                   min="0"
                   step="0.1"
-                  value={currentItem.quantity}
-                  onChange={(e) => setCurrentItem({...currentItem, quantity: parseFloat(e.target.value) || 0})}
-                  className="col-span-3"
                 />
               </div>
               
@@ -601,8 +810,10 @@ const Dashboard = () => {
                     <SelectValue placeholder="Select unit" />
                   </SelectTrigger>
                   <SelectContent>
-                    {unitOptions.map(unit => (
-                      <SelectItem key={unit} value={unit}>{unit}</SelectItem>
+                    {unitOptions.map((unit) => (
+                      <SelectItem key={unit} value={unit}>
+                        {unit}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -613,31 +824,31 @@ const Dashboard = () => {
                 <Input
                   id="edit-price"
                   type="number"
+                  value={currentItem.price || ''}
+                  onChange={(e) => setCurrentItem({...currentItem, price: Number(e.target.value)})}
+                  className="col-span-3"
                   min="0"
-                  step="1"
-                  value={currentItem.price || 0}
-                  onChange={(e) => setCurrentItem({...currentItem, price: parseFloat(e.target.value) || 0})}
+                  step="0.01"
+                />
+              </div>
+              
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="edit-boughtDate" className="text-right">Bought Date</Label>
+                <Input
+                  id="edit-boughtDate"
+                  type="date"
+                  value={currentItem.boughtDate.split('T')[0]}
+                  onChange={(e) => setCurrentItem({...currentItem, boughtDate: e.target.value})}
                   className="col-span-3"
                 />
               </div>
               
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-purchase-date" className="text-right">Purchased</Label>
+                <Label htmlFor="edit-expiryDate" className="text-right">Expiry Date</Label>
                 <Input
-                  id="edit-purchase-date"
+                  id="edit-expiryDate"
                   type="date"
-                  value={currentItem.purchaseDate}
-                  onChange={(e) => setCurrentItem({...currentItem, purchaseDate: e.target.value})}
-                  className="col-span-3"
-                />
-              </div>
-              
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="edit-expiry-date" className="text-right">Expires</Label>
-                <Input
-                  id="edit-expiry-date"
-                  type="date"
-                  value={currentItem.expiryDate}
+                  value={currentItem.expiryDate.split('T')[0]}
                   onChange={(e) => setCurrentItem({...currentItem, expiryDate: e.target.value})}
                   className="col-span-3"
                 />
@@ -646,7 +857,9 @@ const Dashboard = () => {
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setEditItemDialogOpen(false)}>Cancel</Button>
-            <Button onClick={handleEditItem}>Save Changes</Button>
+            <Button onClick={handleEditItem} disabled={!currentItem?.name || !currentItem?.expiryDate}>
+              Save Changes
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -659,27 +872,33 @@ const Dashboard = () => {
           </DialogHeader>
           {currentItem && (
             <div className="grid gap-4 py-4">
-              <p>
-                Current quantity: {currentItem.quantity} {currentItem.unit} of {currentItem.name}
+              <p className="text-center">
+                {currentItem.name} - Current quantity: {currentItem.quantity} {currentItem.unit}
               </p>
+              
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="consume-amount" className="text-right">Amount</Label>
+                <Label htmlFor="consume-amount" className="text-right">Amount Used</Label>
                 <Input
                   id="consume-amount"
                   type="number"
+                  value={consumeAmount}
+                  onChange={(e) => setConsumeAmount(Number(e.target.value))}
+                  className="col-span-3"
                   min="0.1"
                   max={currentItem.quantity}
                   step="0.1"
-                  value={consumeAmount}
-                  onChange={(e) => setConsumeAmount(parseFloat(e.target.value) || 0)}
-                  className="col-span-3"
                 />
               </div>
             </div>
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setConsumeDialogOpen(false)}>Cancel</Button>
-            <Button onClick={handleConsumeItem}>Log Consumption</Button>
+            <Button 
+              onClick={handleConsumeItem} 
+              disabled={!currentItem || consumeAmount <= 0 || consumeAmount > currentItem.quantity}
+            >
+              Log Consumption
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
