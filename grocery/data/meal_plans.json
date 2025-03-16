@@ -1,0 +1,1437 @@
+[
+  {
+    "date": "2025-03-16",
+    "breakfast": {
+      "name": "Spinach and Tomato Frittata",
+      "ingredients": [
+        "4 eggs",
+        "1 cup spinach",
+        "2 tomatoes, diced",
+        "1 onion, diced",
+        "1/4 cup milk",
+        "Salt and pepper to taste"
+      ],
+      "instructions": [
+        "1. Preheat the oven to 375\u00b0F (190\u00b0C).",
+        "2. In a bowl, whisk the eggs and milk together until well combined. Season with salt and pepper.",
+        "3. Heat an oven-safe skillet over medium heat and add diced onions. Cook until softened.",
+        "4. Add the tomatoes and spinach to the skillet and cook for about 2-3 minutes until spinach is wilted.",
+        "5. Pour the egg mixture over the vegetables in the skillet.",
+        "6. Transfer the skillet to the preheated oven and bake for 15-20 minutes, or until the eggs are fully set.",
+        "7. Remove from the oven and let it cool slightly before slicing and serving."
+      ],
+      "dietary_tags": [
+        "vegetarian"
+      ],
+      "prep_time": 30,
+      "calories": 250
+    },
+    "lunch": {
+      "name": "Chicken and Vegetable Rice",
+      "ingredients": [
+        "200g chicken breast, diced",
+        "1 cup rice",
+        "1 bell pepper, diced",
+        "1 onion, diced",
+        "2 tomatoes, diced",
+        "1 cup spinach",
+        "1 tablespoon olive oil",
+        "Salt and pepper to taste"
+      ],
+      "instructions": [
+        "1. Cook the rice according to package instructions.",
+        "2. Heat olive oil in a large skillet over medium heat, add diced chicken breast, and cook until browned.",
+        "3. Add the diced onion and bell pepper to the skillet and cook until vegetables are softened.",
+        "4. Add the tomatoes and spinach to the skillet and cook for an additional 2-3 minutes.",
+        "5. Season with salt and pepper to taste.",
+        "6. Serve the chicken and vegetable mixture over a bed of rice."
+      ],
+      "dietary_tags": [
+        "gluten-free"
+      ],
+      "prep_time": 35,
+      "calories": 550
+    },
+    "dinner": {
+      "name": "Grilled Chicken Sandwich",
+      "ingredients": [
+        "200g chicken breast",
+        "2 slices bread",
+        "1 bell pepper, sliced",
+        "1 onion, sliced",
+        "1 tablespoon olive oil",
+        "Salt and pepper to taste",
+        "Optional: lettuce, tomato slices"
+      ],
+      "instructions": [
+        "1. Preheat a grill or skillet over medium heat.",
+        "2. Brush the chicken breast with olive oil and season with salt and pepper.",
+        "3. Grill the chicken breast for 5-7 minutes on each side, or until fully cooked.",
+        "4. In a separate skillet, add olive oil and cook the sliced bell pepper and onion until softened.",
+        "5. Toast the slices of bread if desired.",
+        "6. Assemble the sandwich by placing the grilled chicken breast on one slice of bread, adding the cooked bell pepper and onion, and topping with the second slice of bread. Add lettuce and tomato slices if using."
+      ],
+      "dietary_tags": [
+        "balanced"
+      ],
+      "prep_time": 25,
+      "calories": 450
+    },
+    "suggested_recipes": [
+      {
+        "name": "Tomato and Spinach Rice",
+        "ingredients": [
+          "1 cup rice",
+          "2 tomatoes, diced",
+          "1 cup spinach",
+          "1 onion, diced",
+          "1 tablespoon olive oil",
+          "Salt and pepper to taste"
+        ],
+        "instructions": [
+          "1. Cook the rice according to package instructions.",
+          "2. Heat olive oil in a skillet over medium heat, add diced onion, and cook until softened.",
+          "3. Add diced tomatoes and spinach to the skillet and cook for 2-3 minutes.",
+          "4. Mix the cooked vegetables with the rice and season with salt and pepper to taste. Serve hot."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "gluten-free"
+        ],
+        "prep_time": 20,
+        "calories": 300
+      },
+      {
+        "name": "Chicken and Veggie Pasta",
+        "ingredients": [
+          "200g pasta",
+          "200g chicken breast, diced",
+          "1 bell pepper, diced",
+          "1 onion, diced",
+          "2 tomatoes, diced",
+          "1 tablespoon olive oil",
+          "Salt and pepper to taste"
+        ],
+        "instructions": [
+          "1. Cook the pasta according to package instructions.",
+          "2. Heat olive oil in a skillet over medium heat, add diced chicken breast, and cook until browned.",
+          "3. Add the diced onion and bell pepper to the skillet and cook until vegetables are softened.",
+          "4. Add the tomatoes to the skillet and cook for an additional 2-3 minutes.",
+          "5. Mix the cooked chicken and vegetables with the pasta and season with salt and pepper to taste. Serve hot."
+        ],
+        "dietary_tags": [
+          "balanced"
+        ],
+        "prep_time": 30,
+        "calories": 500
+      },
+      {
+        "name": "Vegetable Stir-Fry",
+        "ingredients": [
+          "1 bell pepper, sliced",
+          "1 onion, sliced",
+          "2 tomatoes, diced",
+          "1 cup spinach",
+          "1 tablespoon olive oil",
+          "Salt and pepper to taste"
+        ],
+        "instructions": [
+          "1. Heat olive oil in a large skillet over medium heat.",
+          "2. Add the sliced onion and bell pepper to the skillet and cook until vegetables are softened.",
+          "3. Add the diced tomatoes and spinach to the skillet and cook for an additional 2-3 minutes.",
+          "4. Season with salt and pepper to taste and serve hot."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "gluten-free",
+          "vegan"
+        ],
+        "prep_time": 20,
+        "calories": 200
+      }
+    ]
+  },
+  {
+    "date": "2025-03-16",
+    "breakfast": {
+      "name": "Spinach and Bell Pepper Omelette",
+      "ingredients": [
+        "3 eggs",
+        "1/2 bell pepper, diced",
+        "100g spinach",
+        "1/2 onion, diced",
+        "Salt and pepper to taste",
+        "1 tablespoon milk (optional)"
+      ],
+      "instructions": [
+        "In a medium bowl, whisk the eggs with the milk (optional), salt, and pepper.",
+        "Heat a non-stick pan over medium heat and add a little oil or butter.",
+        "Add the diced onion and bell pepper to the pan and saut\u00e9 until softened, about 5 minutes.",
+        "Add the spinach and cook for another 2 minutes until wilted.",
+        "Pour the egg mixture over the vegetables in the pan and cook without stirring until the eggs begin to set around the edges.",
+        "Using a spatula, gently lift the edges of the omelette and tilt the pan to allow any uncooked egg to flow to the edges.",
+        "Once the omelette is mostly set, fold it in half and cook for an additional minute. Serve hot."
+      ],
+      "dietary_tags": [
+        "vegetarian"
+      ],
+      "prep_time": 15,
+      "calories": 250
+    },
+    "lunch": {
+      "name": "Chicken and Spinach Salad",
+      "ingredients": [
+        "200g chicken breast, cooked and sliced",
+        "100g spinach",
+        "1 tomato, sliced",
+        "1/2 bell pepper, sliced",
+        "1/2 onion, thinly sliced",
+        "2 tablespoons olive oil",
+        "1 tablespoon balsamic vinegar",
+        "Salt and pepper to taste"
+      ],
+      "instructions": [
+        "In a large bowl, combine the spinach, tomato, bell pepper, and onion.",
+        "Top with the cooked and sliced chicken breast.",
+        "In a small bowl, whisk together the olive oil, balsamic vinegar, salt, and pepper.",
+        "Drizzle the dressing over the salad and toss to combine. Serve immediately."
+      ],
+      "dietary_tags": [
+        "balanced"
+      ],
+      "prep_time": 20,
+      "calories": 350
+    },
+    "dinner": {
+      "name": "Chicken and Vegetable Pasta",
+      "ingredients": [
+        "200g pasta",
+        "200g chicken breast, diced",
+        "1 bell pepper, sliced",
+        "1 tomato, diced",
+        "1 onion, diced",
+        "2 cloves garlic, minced",
+        "2 tablespoons olive oil",
+        "Salt and pepper to taste",
+        "1/2 teaspoon dried basil",
+        "1/2 teaspoon dried oregano"
+      ],
+      "instructions": [
+        "Cook the pasta according to the package instructions. Drain and set aside.",
+        "Heat the olive oil in a large pan over medium heat. Add the garlic and onion and saut\u00e9 until fragrant, about 3 minutes.",
+        "Add the diced chicken breast to the pan and cook until browned and cooked through, about 7 minutes.",
+        "Add the bell pepper and tomato to the pan and cook for an additional 5 minutes.",
+        "Season with salt, pepper, dried basil, and dried oregano.",
+        "Add the cooked pasta to the pan and toss to combine. Serve hot."
+      ],
+      "dietary_tags": [
+        "balanced"
+      ],
+      "prep_time": 30,
+      "calories": 600
+    },
+    "suggested_recipes": [
+      {
+        "name": "Chicken and Rice Stir-Fry",
+        "ingredients": [
+          "200g chicken breast, diced",
+          "100g rice",
+          "1 bell pepper, sliced",
+          "1 onion, sliced",
+          "1 tomato, diced",
+          "2 cloves garlic, minced",
+          "2 tablespoons soy sauce",
+          "1 tablespoon olive oil",
+          "Salt and pepper to taste"
+        ],
+        "instructions": [
+          "Cook the rice according to package instructions.",
+          "Heat the olive oil in a large pan over medium heat. Add the garlic and onion and saut\u00e9 until fragrant, about 3 minutes.",
+          "Add the diced chicken breast and cook until browned and cooked through, about 7 minutes.",
+          "Add the bell pepper and tomato and cook for an additional 5 minutes.",
+          "Add the cooked rice to the pan, along with the soy sauce. Toss to combine. Serve hot."
+        ],
+        "dietary_tags": [
+          "balanced"
+        ],
+        "prep_time": 25,
+        "calories": 550
+      },
+      {
+        "name": "Chicken and Vegetable Soup",
+        "ingredients": [
+          "200g chicken breast, diced",
+          "500ml chicken broth",
+          "1 onion, diced",
+          "1 tomato, diced",
+          "1 bell pepper, diced",
+          "2 cloves garlic, minced",
+          "100g spinach",
+          "Salt and pepper to taste",
+          "1/2 teaspoon thyme",
+          "1/2 teaspoon basil"
+        ],
+        "instructions": [
+          "Heat a large pot over medium heat and add a bit of olive oil.",
+          "Add the garlic and onion and saut\u00e9 until fragrant, about 3 minutes.",
+          "Add the diced chicken breast and cook until browned, about 5 minutes.",
+          "Add the bell pepper and tomato and cook for another 3 minutes.",
+          "Pour in the chicken broth and bring to a simmer.",
+          "Add the spinach, thyme, basil, salt, and pepper. Simmer for 15 minutes. Serve hot."
+        ],
+        "dietary_tags": [
+          "balanced"
+        ],
+        "prep_time": 30,
+        "calories": 300
+      }
+    ]
+  },
+  {
+    "date": "2025-03-16",
+    "breakfast": {
+      "name": "Spinach and Bell Pepper Breakfast Wrap",
+      "ingredients": [
+        "2 eggs",
+        "50g spinach",
+        "1 bell pepper",
+        "1/4 onion",
+        "1 piece bread (wrap)",
+        "Salt and pepper to taste"
+      ],
+      "instructions": [
+        "Chop the bell pepper and onion into small pieces.",
+        "In a non-stick pan, saut\u00e9 the onion and bell pepper until soft.",
+        "Add the spinach to the pan and cook until wilted.",
+        "Whisk the eggs in a bowl and pour over the vegetables. Cook until eggs are set.",
+        "Season with salt and pepper.",
+        "Serve the egg and vegetable mixture in a wrap."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "balanced"
+      ],
+      "prep_time": 15,
+      "calories": 300
+    },
+    "lunch": {
+      "name": "Grilled Chicken Salad",
+      "ingredients": [
+        "200g chicken breast",
+        "100g spinach",
+        "1 tomato",
+        "1/2 bell pepper",
+        "1/4 onion",
+        "1 tablespoon olive oil",
+        "Salt and pepper to taste"
+      ],
+      "instructions": [
+        "Season the chicken breast with salt and pepper.",
+        "Grill the chicken breast until fully cooked, then slice into strips.",
+        "Chop the tomato, bell pepper, and onion.",
+        "In a large bowl, combine the spinach, tomato, bell pepper, and onion.",
+        "Add the chicken strips to the bowl.",
+        "Drizzle with olive oil and toss the salad to combine."
+      ],
+      "dietary_tags": [
+        "balanced"
+      ],
+      "prep_time": 20,
+      "calories": 400
+    },
+    "dinner": {
+      "name": "Chicken and Rice Stir Fry",
+      "ingredients": [
+        "200g chicken breast",
+        "100g rice",
+        "1 bell pepper",
+        "1/2 onion",
+        "1 tomato",
+        "1 tablespoon soy sauce",
+        "1 tablespoon olive oil",
+        "Salt and pepper to taste"
+      ],
+      "instructions": [
+        "Cook the rice according to package instructions.",
+        "While the rice is cooking, chop the bell pepper, onion, and tomato.",
+        "Dice the chicken breast into small pieces.",
+        "In a large pan, heat the olive oil over medium heat.",
+        "Add the chicken pieces and cook until browned and cooked through.",
+        "Add the bell pepper, onion, and tomato to the pan and saut\u00e9 until vegetables are tender.",
+        "Add the cooked rice to the pan and stir to combine.",
+        "Season with soy sauce, salt, and pepper."
+      ],
+      "dietary_tags": [
+        "balanced"
+      ],
+      "prep_time": 25,
+      "calories": 500
+    },
+    "suggested_recipes": [
+      {
+        "name": "Egg and Tomato Sandwich",
+        "ingredients": [
+          "2 eggs",
+          "1 tomato",
+          "1 piece bread",
+          "Salt and pepper to taste"
+        ],
+        "instructions": [
+          "Slice the tomato into thin slices.",
+          "Toast the bread.",
+          "Scramble the eggs in a pan, seasoning with salt and pepper.",
+          "Assemble the sandwich with scrambled eggs and tomato slices."
+        ],
+        "dietary_tags": [
+          "vegetarian"
+        ],
+        "prep_time": 10,
+        "calories": 250
+      },
+      {
+        "name": "Vegetable Pasta",
+        "ingredients": [
+          "150g pasta",
+          "1 bell pepper",
+          "1/2 onion",
+          "1 tomato",
+          "1 tablespoon olive oil",
+          "Salt and pepper to taste"
+        ],
+        "instructions": [
+          "Cook the pasta according to package instructions.",
+          "Chop the bell pepper, onion, and tomato.",
+          "In a large pan, heat the olive oil over medium heat.",
+          "Add the bell pepper and onion and saut\u00e9 until tender.",
+          "Add the tomato and cook for another 2 minutes.",
+          "Toss the cooked pasta with the vegetable mixture and season with salt and pepper."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "balanced"
+        ],
+        "prep_time": 20,
+        "calories": 350
+      },
+      {
+        "name": "Chicken and Spinach Rice Bowl",
+        "ingredients": [
+          "200g chicken breast",
+          "100g rice",
+          "50g spinach",
+          "1/4 onion",
+          "1 tablespoon soy sauce",
+          "1 tablespoon olive oil",
+          "Salt and pepper to taste"
+        ],
+        "instructions": [
+          "Cook the rice according to package instructions.",
+          "Dice the chicken breast into small pieces.",
+          "Chop the onion.",
+          "In a large pan, heat the olive oil over medium heat.",
+          "Add the chicken pieces and cook until browned and cooked through.",
+          "Add the onion and cook until tender.",
+          "Add the spinach and cook until wilted.",
+          "Add the cooked rice to the pan and stir to combine.",
+          "Season with soy sauce, salt, and pepper."
+        ],
+        "dietary_tags": [
+          "balanced"
+        ],
+        "prep_time": 20,
+        "calories": 450
+      }
+    ]
+  },
+  {
+    "date": "2025-03-16",
+    "breakfast": {
+      "name": "Tofu Scramble",
+      "ingredients": [
+        "200g tofu",
+        "2 carrots, diced",
+        "1 tbsp olive oil",
+        "Salt and pepper to taste"
+      ],
+      "instructions": [
+        "1. Heat the olive oil in a pan over medium heat.",
+        "2. Crumble the tofu into the pan and cook for a few minutes.",
+        "3. Add the diced carrots and cook until tender.",
+        "4. Season with salt and pepper to taste.",
+        "5. Serve warm."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "dairy-free",
+        "nut-free"
+      ],
+      "prep_time": 15,
+      "calories": 180
+    },
+    "lunch": {
+      "name": "Broccoli and Chickpea Stir-fry",
+      "ingredients": [
+        "1 piece broccoli, chopped",
+        "300g chickpeas",
+        "2 tbsp olive oil",
+        "Salt and pepper to taste"
+      ],
+      "instructions": [
+        "1. Heat the olive oil in a large pan over medium heat.",
+        "2. Add the chopped broccoli and cook until tender.",
+        "3. Add the chickpeas and cook for a few more minutes.",
+        "4. Season with salt and pepper to taste.",
+        "5. Serve warm."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "dairy-free",
+        "nut-free"
+      ],
+      "prep_time": 20,
+      "calories": 350
+    },
+    "dinner": {
+      "name": "Vegetable Rice Bowl",
+      "ingredients": [
+        "200g rice",
+        "3 carrots, diced",
+        "1 tbsp olive oil",
+        "Salt and pepper to taste"
+      ],
+      "instructions": [
+        "1. Cook the rice according to package instructions.",
+        "2. Heat the olive oil in a pan over medium heat.",
+        "3. Add the diced carrots and cook until tender.",
+        "4. Mix the cooked rice with the carrots.",
+        "5. Season with salt and pepper to taste.",
+        "6. Serve warm."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "dairy-free",
+        "nut-free"
+      ],
+      "prep_time": 30,
+      "calories": 400
+    },
+    "suggested_recipes": []
+  },
+  {
+    "date": "2025-03-16",
+    "breakfast": {
+      "name": "Tofu Spinach Breakfast Burrito",
+      "ingredients": [
+        "100g tofu",
+        "75g spinach",
+        "1 tomato, diced",
+        "1 onion, diced",
+        "1 tortilla wrap"
+      ],
+      "instructions": [
+        "1. Crumble the tofu into a mixing bowl.",
+        "2. In a pan, saut\u00e9 the diced onion until translucent.",
+        "3. Add the crumbled tofu and cook for 5 minutes.",
+        "4. Add the diced tomato and spinach. Cook until the spinach is wilted.",
+        "5. Place the tofu mixture onto a tortilla wrap and roll it up."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "vegan"
+      ],
+      "prep_time": 20,
+      "calories": 350
+    },
+    "lunch": {
+      "name": "Tomato and Spinach Rice Bowl",
+      "ingredients": [
+        "200g cooked rice",
+        "2 tomatoes, diced",
+        "75g spinach",
+        "1 onion, diced",
+        "Soy sauce to taste"
+      ],
+      "instructions": [
+        "1. In a pan, saut\u00e9 the diced onion until translucent.",
+        "2. Add the diced tomatoes and cook until they soften.",
+        "3. Add the spinach and cook until wilted.",
+        "4. Add the cooked rice and mix well.",
+        "5. Season with soy sauce to taste."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "vegan"
+      ],
+      "prep_time": 25,
+      "calories": 450
+    },
+    "dinner": {
+      "name": "Vegetable Tofu Stir-fry",
+      "ingredients": [
+        "100g tofu, cubed",
+        "1 tomato, diced",
+        "1 onion, diced",
+        "75g spinach",
+        "2 cups cooked rice",
+        "Soy sauce to taste"
+      ],
+      "instructions": [
+        "1. In a pan, saut\u00e9 diced onion until translucent.",
+        "2. Add the cubed tofu and cook until golden brown.",
+        "3. Add the diced tomato and cook until softened.",
+        "4. Add the spinach and cook until wilted.",
+        "5. Serve the tofu and vegetable mixture over cooked rice.",
+        "6. Season with soy sauce to taste."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "vegan"
+      ],
+      "prep_time": 30,
+      "calories": 500
+    },
+    "suggested_recipes": [
+      {
+        "name": "Tomato and Spinach Salad",
+        "ingredients": [
+          "2 tomatoes, diced",
+          "75g spinach",
+          "1 onion, diced",
+          "Lemon juice",
+          "Salt and pepper to taste"
+        ],
+        "instructions": [
+          "1. In a mixing bowl, combine diced tomatoes, spinach, and diced onion.",
+          "2. Drizzle with lemon juice.",
+          "3. Season with salt and pepper to taste.",
+          "4. Toss well and serve immediately."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "vegan"
+        ],
+        "prep_time": 15,
+        "calories": 200
+      },
+      {
+        "name": "Tofu and Rice Stir-fry",
+        "ingredients": [
+          "100g tofu, cubed",
+          "1 onion, diced",
+          "1 tomato, diced",
+          "75g spinach",
+          "200g cooked rice",
+          "Soy sauce to taste"
+        ],
+        "instructions": [
+          "1. In a pan, saut\u00e9 diced onion until translucent.",
+          "2. Add the cubed tofu and cook until golden brown.",
+          "3. Add the diced tomato and cook until softened.",
+          "4. Add the spinach and cook until wilted.",
+          "5. Mix in the cooked rice and stir well.",
+          "6. Season with soy sauce to taste."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "vegan"
+        ],
+        "prep_time": 25,
+        "calories": 450
+      },
+      {
+        "name": "Tofu and Tomato Sandwich",
+        "ingredients": [
+          "2 slices of bread",
+          "100g tofu, sliced",
+          "1 tomato, sliced",
+          "75g spinach",
+          "Salt and pepper to taste"
+        ],
+        "instructions": [
+          "1. Toast the bread slices.",
+          "2. Layer the tofu, tomato slices, and spinach on one slice of bread.",
+          "3. Season with salt and pepper to taste.",
+          "4. Top with the other slice of bread.",
+          "5. Serve immediately."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "vegan"
+        ],
+        "prep_time": 10,
+        "calories": 300
+      }
+    ]
+  },
+  {
+    "date": "2025-03-16",
+    "breakfast": {
+      "name": "Tomato and Spinach Tofu Scramble",
+      "ingredients": [
+        "3 tomatoes",
+        "1 onion",
+        "200g tofu",
+        "100g spinach",
+        "2 tbsp olive oil",
+        "Salt to taste",
+        "Pepper to taste"
+      ],
+      "instructions": [
+        "Chop the onion, tomatoes, and spinach.",
+        "Heat olive oil in a pan over medium heat.",
+        "Add chopped onions and saut\u00e9 until translucent.",
+        "Crumble tofu into the pan and cook for 5 minutes.",
+        "Add tomatoes and spinach to the pan and cook for another 5 minutes.",
+        "Season with salt and pepper to taste.",
+        "Serve hot."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "vegan",
+        "dairy-free"
+      ],
+      "prep_time": 15,
+      "calories": 300
+    },
+    "lunch": {
+      "name": "Vegetable Tomato Rice Bowl",
+      "ingredients": [
+        "200g rice",
+        "2 tomatoes",
+        "1 onion",
+        "50g spinach",
+        "2 tbsp olive oil",
+        "Salt to taste",
+        "Pepper to taste"
+      ],
+      "instructions": [
+        "Cook the rice according to package instructions.",
+        "Chop the tomatoes, onion, and spinach.",
+        "Heat olive oil in a pan over medium heat.",
+        "Add chopped onions and saut\u00e9 until translucent.",
+        "Add tomatoes to the pan and cook for 5 minutes.",
+        "Add spinach and cook for another 3 minutes.",
+        "Season with salt and pepper.",
+        "Serve the vegetable mixture over the cooked rice."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "vegan",
+        "dairy-free"
+      ],
+      "prep_time": 25,
+      "calories": 550
+    },
+    "dinner": {
+      "name": "Tomato and Spinach Rice Stir-fry",
+      "ingredients": [
+        "300g rice",
+        "2 tomatoes",
+        "1 onion",
+        "100g spinach",
+        "2 tbsp olive oil",
+        "Salt to taste",
+        "Pepper to taste"
+      ],
+      "instructions": [
+        "Cook the rice according to package instructions.",
+        "Chop the tomatoes, onion, and spinach.",
+        "Heat olive oil in a pan over medium heat.",
+        "Add chopped onions and saut\u00e9 until translucent.",
+        "Add tomatoes to the pan and cook for 5 minutes.",
+        "Add spinach and cook for another 3 minutes.",
+        "Mix the cooked rice with the vegetables in the pan.",
+        "Season with salt and pepper.",
+        "Serve hot."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "vegan",
+        "dairy-free"
+      ],
+      "prep_time": 20,
+      "calories": 600
+    },
+    "suggested_recipes": [
+      {
+        "name": "Spinach and Tomato Salad",
+        "ingredients": [
+          "2 tomatoes",
+          "50g spinach",
+          "1 tbsp olive oil",
+          "Salt to taste",
+          "Pepper to taste"
+        ],
+        "instructions": [
+          "Chop the tomatoes and spinach.",
+          "Combine the vegetables in a bowl.",
+          "Drizzle with olive oil.",
+          "Season with salt and pepper.",
+          "Toss to mix well.",
+          "Serve fresh."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "vegan",
+          "dairy-free"
+        ],
+        "prep_time": 10,
+        "calories": 120
+      },
+      {
+        "name": "Tomato and Rice Pilaf",
+        "ingredients": [
+          "200g rice",
+          "2 tomatoes",
+          "1 onion",
+          "1 tbsp olive oil",
+          "Salt to taste",
+          "Pepper to taste"
+        ],
+        "instructions": [
+          "Cook the rice according to package instructions.",
+          "Chop the tomatoes and onion.",
+          "Heat olive oil in a pan over medium heat.",
+          "Add chopped onions and saut\u00e9 until translucent.",
+          "Add tomatoes to the pan and cook for 5 minutes.",
+          "Mix the cooked rice with the tomatoes and onions in the pan.",
+          "Season with salt and pepper.",
+          "Serve hot."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "vegan",
+          "dairy-free"
+        ],
+        "prep_time": 20,
+        "calories": 350
+      },
+      {
+        "name": "Tofu and Spinach Stir-fry",
+        "ingredients": [
+          "200g tofu",
+          "100g spinach",
+          "1 onion",
+          "1 tbsp olive oil",
+          "Salt to taste",
+          "Pepper to taste"
+        ],
+        "instructions": [
+          "Chop the tofu, spinach, and onion.",
+          "Heat olive oil in a pan over medium heat.",
+          "Add chopped onions and saut\u00e9 until translucent.",
+          "Add tofu to the pan and cook for 5 minutes.",
+          "Add spinach and cook for another 3 minutes.",
+          "Season with salt and pepper.",
+          "Serve hot."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "vegan",
+          "dairy-free"
+        ],
+        "prep_time": 15,
+        "calories": 220
+      }
+    ]
+  },
+  {
+    "date": "2025-03-16",
+    "breakfast": {
+      "name": "Tomato Spinach Tofu Wrap",
+      "ingredients": [
+        "100g tofu",
+        "2 tomatoes",
+        "50g spinach",
+        "1 onion",
+        "1 whole wheat wrap"
+      ],
+      "instructions": [
+        "1. Crumble the tofu in a bowl.",
+        "2. Dice the tomatoes and onions, and chop the spinach.",
+        "3. In a pan, saut\u00e9 the onions until translucent.",
+        "4. Add the tomatoes and cook until they soften.",
+        "5. Add the crumbled tofu and spinach, and cook until the spinach wilts.",
+        "6. Season with salt and pepper to taste.",
+        "7. Place the mixture in the wrap and roll it up.",
+        "8. Serve while warm."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "dairy-free"
+      ],
+      "prep_time": 15,
+      "calories": 350
+    },
+    "lunch": {
+      "name": "Rice and Tofu Stir-fry with Spinach and Tomatoes",
+      "ingredients": [
+        "200g tofu",
+        "2 tomatoes",
+        "100g spinach",
+        "1 onion",
+        "100g rice",
+        "2 tbsp soy sauce"
+      ],
+      "instructions": [
+        "1. Cook the rice according to package instructions.",
+        "2. Dice the tofu and marinate it in soy sauce for 10 minutes.",
+        "3. In a pan, saut\u00e9 the onions until translucent.",
+        "4. Add the diced tomatoes and cook until they soften.",
+        "5. Add the marinated tofu and cook until it browns slightly.",
+        "6. Add the spinach and cook until it wilts.",
+        "7. Combine the mixture with the cooked rice and stir well.",
+        "8. Season with salt and pepper to taste.",
+        "9. Serve hot."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "dairy-free"
+      ],
+      "prep_time": 20,
+      "calories": 600
+    },
+    "dinner": {
+      "name": "Tomato and Spinach Rice Pilaf",
+      "ingredients": [
+        "200g rice",
+        "1 tomato",
+        "100g spinach",
+        "1 onion",
+        "1 tbsp olive oil"
+      ],
+      "instructions": [
+        "1. Cook the rice according to package instructions.",
+        "2. Dice the tomato and chop the onion and spinach.",
+        "3. In a pan, heat the olive oil and saut\u00e9 the onions until translucent.",
+        "4. Add the tomatoes and cook until they soften.",
+        "5. Add the spinach and cook until it wilts.",
+        "6. Combine the vegetable mixture with the cooked rice and stir well.",
+        "7. Season with salt and pepper to taste.",
+        "8. Serve warm."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "dairy-free"
+      ],
+      "prep_time": 20,
+      "calories": 550
+    },
+    "suggested_recipes": [
+      {
+        "name": "Simple Tomato and Spinach Salad",
+        "ingredients": [
+          "2 tomatoes",
+          "50g spinach",
+          "1 onion",
+          "1 tbsp olive oil",
+          "1 tbsp balsamic vinegar"
+        ],
+        "instructions": [
+          "1. Dice the tomatoes and onions, and chop the spinach.",
+          "2. In a bowl, combine the tomatoes, onions, and spinach.",
+          "3. Drizzle with olive oil and balsamic vinegar.",
+          "4. Season with salt and pepper.",
+          "5. Toss well and serve."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "dairy-free"
+        ],
+        "prep_time": 10,
+        "calories": 150
+      },
+      {
+        "name": "Tofu and Spinach Stir-fry",
+        "ingredients": [
+          "100g tofu",
+          "50g spinach",
+          "1 onion",
+          "1 tbsp soy sauce"
+        ],
+        "instructions": [
+          "1. Dice the tofu and marinate it in soy sauce for 10 minutes.",
+          "2. In a pan, saut\u00e9 the onions until translucent.",
+          "3. Add the marinated tofu and cook until it browns slightly.",
+          "4. Add the spinach and cook until it wilts.",
+          "5. Season with salt and pepper to taste.",
+          "6. Serve hot."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "dairy-free"
+        ],
+        "prep_time": 15,
+        "calories": 250
+      },
+      {
+        "name": "Tomato and Onion Rice",
+        "ingredients": [
+          "100g rice",
+          "1 tomato",
+          "1 onion"
+        ],
+        "instructions": [
+          "1. Cook the rice according to package instructions.",
+          "2. Dice the tomato and chop the onion.",
+          "3. In a pan, saut\u00e9 the onions until translucent.",
+          "4. Add the diced tomato and cook until it softens.",
+          "5. Combine the mixture with the cooked rice and stir well.",
+          "6. Season with salt and pepper to taste.",
+          "7. Serve warm."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "dairy-free"
+        ],
+        "prep_time": 15,
+        "calories": 300
+      }
+    ]
+  },
+  {
+    "date": "2025-03-16",
+    "breakfast": {
+      "name": "Tofu Scramble with Spinach and Tomatoes",
+      "ingredients": [
+        "200g tofu",
+        "2 tomatoes",
+        "100g spinach",
+        "1 onion",
+        "Salt to taste",
+        "Pepper to taste"
+      ],
+      "instructions": [
+        "1. Crumble the tofu into a bowl.",
+        "2. Dice the tomatoes and onions.",
+        "3. Heat a pan over medium heat and add the onions. Saut\u00e9 until translucent.",
+        "4. Add the crumbled tofu to the pan and cook for 5 minutes.",
+        "5. Add the diced tomatoes and spinach to the pan and cook until the spinach is wilted.",
+        "6. Season with salt and pepper to taste.",
+        "7. Serve hot."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "vegan"
+      ],
+      "prep_time": 20,
+      "calories": 250
+    },
+    "lunch": {
+      "name": "Tomato Rice Pilaf with Spinach",
+      "ingredients": [
+        "200g rice",
+        "3 tomatoes",
+        "50g spinach",
+        "1 onion",
+        "Salt to taste",
+        "Pepper to taste",
+        "2 cups water"
+      ],
+      "instructions": [
+        "1. Rinse the rice until the water runs clear.",
+        "2. Dice the tomatoes and onion.",
+        "3. In a pot, heat some oil and saut\u00e9 the onion until translucent.",
+        "4. Add the rice to the pot and toast for 2-3 minutes.",
+        "5. Add the diced tomatoes and water to the pot.",
+        "6. Bring to a boil, then reduce the heat to low, cover, and simmer for 15-20 minutes until the rice is cooked.",
+        "7. Stir in the spinach and cook for an additional 2 minutes.",
+        "8. Season with salt and pepper to taste.",
+        "9. Serve hot."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "vegan"
+      ],
+      "prep_time": 30,
+      "calories": 400
+    },
+    "dinner": {
+      "name": "Vegetable Tofu Stir-fry",
+      "ingredients": [
+        "150g tofu",
+        "2 tomatoes",
+        "50g spinach",
+        "1 onion",
+        "1 cup rice (cooked)",
+        "Soy sauce to taste",
+        "Salt to taste",
+        "Pepper to taste"
+      ],
+      "instructions": [
+        "1. Dice the tofu, tomatoes, and onion.",
+        "2. Heat a pan over medium heat and add a little oil.",
+        "3. Add the diced onion to the pan and saut\u00e9 until translucent.",
+        "4. Add the tofu to the pan and cook until golden brown.",
+        "5. Add the tomatoes and spinach to the pan and cook until the spinach is wilted and tomatoes are soft.",
+        "6. Add cooked rice and soy sauce to the pan and stir well.",
+        "7. Season with salt and pepper to taste.",
+        "8. Serve hot."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "vegan"
+      ],
+      "prep_time": 25,
+      "calories": 350
+    },
+    "suggested_recipes": [
+      {
+        "name": "Tomato and Spinach Soup",
+        "ingredients": [
+          "3 tomatoes",
+          "100g spinach",
+          "1 onion",
+          "2 cups vegetable stock",
+          "Salt to taste",
+          "Pepper to taste"
+        ],
+        "instructions": [
+          "1. Dice the tomatoes and onion.",
+          "2. Heat a pot over medium heat and add a little oil.",
+          "3. Add the onion to the pot and saut\u00e9 until translucent.",
+          "4. Add the tomatoes to the pot and cook until soft.",
+          "5. Add the vegetable stock and bring to a boil.",
+          "6. Reduce the heat and simmer for 10 minutes.",
+          "7. Stir in the spinach and cook until wilted.",
+          "8. Season with salt and pepper to taste.",
+          "9. Serve hot."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "vegan"
+        ],
+        "prep_time": 20,
+        "calories": 150
+      },
+      {
+        "name": "Spinach and Tomato Salad",
+        "ingredients": [
+          "100g spinach",
+          "2 tomatoes",
+          "1 onion",
+          "Salt to taste",
+          "Pepper to taste",
+          "Olive oil"
+        ],
+        "instructions": [
+          "1. Dice the tomatoes and onion.",
+          "2. In a large bowl, combine the spinach, tomatoes, and onion.",
+          "3. Drizzle with olive oil.",
+          "4. Season with salt and pepper to taste.",
+          "5. Toss well to combine.",
+          "6. Serve fresh."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "vegan"
+        ],
+        "prep_time": 10,
+        "calories": 100
+      },
+      {
+        "name": "Tomato and Spinach Rice Casserole",
+        "ingredients": [
+          "200g rice",
+          "3 tomatoes",
+          "100g spinach",
+          "1 onion",
+          "Salt to taste",
+          "Pepper to taste",
+          "2 cups water"
+        ],
+        "instructions": [
+          "1. Preheat the oven to 180\u00b0C (350\u00b0F).",
+          "2. Rinse the rice until the water runs clear.",
+          "3. Dice the tomatoes and onion.",
+          "4. In a pan, heat some oil and saut\u00e9 the onion until translucent.",
+          "5. Add the rice to the pan and toast for 2-3 minutes.",
+          "6. Add the diced tomatoes and water to the pan.",
+          "7. Bring to a boil, then reduce the heat to low, cover, and simmer for 10 minutes.",
+          "8. Transfer the mixture to a casserole dish and stir in the spinach.",
+          "9. Cover with foil and bake for 20 minutes.",
+          "10. Season with salt and pepper to taste.",
+          "11. Serve hot."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "vegan"
+        ],
+        "prep_time": 30,
+        "calories": 350
+      }
+    ]
+  },
+  {
+    "date": "2025-03-16",
+    "breakfast": {
+      "name": "Papaya and Toast",
+      "ingredients": [
+        "2 slices bread",
+        "1 cup papaya, diced"
+      ],
+      "instructions": [
+        "Toast the bread slices in a toaster until golden brown.",
+        "Serve with diced papaya on the side."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "dairy-free"
+      ],
+      "prep_time": 10,
+      "calories": 300
+    },
+    "lunch": {
+      "name": "Vegetable Stir-fry with Tofu",
+      "ingredients": [
+        "200 grams tofu, diced",
+        "1 cup mixed vegetables (carrots, bell peppers, broccoli)",
+        "2 tablespoons soy sauce",
+        "1 tablespoon olive oil",
+        "Salt and pepper to taste"
+      ],
+      "instructions": [
+        "Heat the olive oil in a pan over medium heat.",
+        "Add tofu and cook until golden brown on all sides.",
+        "Add mixed vegetables and stir-fry for 5-7 minutes until tender.",
+        "Add soy sauce, salt, and pepper. Stir well to combine.",
+        "Serve hot."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "dairy-free"
+      ],
+      "prep_time": 20,
+      "calories": 350
+    },
+    "dinner": {
+      "name": "Bread and Vegetable Soup",
+      "ingredients": [
+        "2 slices bread",
+        "3 cups vegetable stock",
+        "1 cup mixed vegetables (carrots, celery, potatoes)",
+        "1 tablespoon olive oil",
+        "Salt and pepper to taste"
+      ],
+      "instructions": [
+        "Heat olive oil in a pot over medium heat.",
+        "Add mixed vegetables and cook for 5-7 minutes until tender.",
+        "Add vegetable stock, bring to a boil, then reduce heat and simmer for 15 minutes.",
+        "Season with salt and pepper.",
+        "Serve hot with toasted bread on the side."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "dairy-free"
+      ],
+      "prep_time": 30,
+      "calories": 400
+    },
+    "suggested_recipes": [
+      {
+        "name": "Papaya Smoothie",
+        "ingredients": [
+          "1 cup papaya, diced",
+          "1 cup water",
+          "1 tablespoon honey"
+        ],
+        "instructions": [
+          "Add papaya, water, and honey to a blender.",
+          "Blend until smooth.",
+          "Serve chilled."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "dairy-free"
+        ],
+        "prep_time": 5,
+        "calories": 150
+      },
+      {
+        "name": "Mixed Vegetable Rice",
+        "ingredients": [
+          "1 cup cooked rice",
+          "1 cup mixed vegetables (carrots, peas, corn)",
+          "2 tablespoons soy sauce",
+          "Salt and pepper to taste"
+        ],
+        "instructions": [
+          "Heat a pan over medium heat.",
+          "Add mixed vegetables and cook for 5-7 minutes until tender.",
+          "Add cooked rice, soy sauce, salt, and pepper. Stir well.",
+          "Serve hot."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "dairy-free"
+        ],
+        "prep_time": 15,
+        "calories": 300
+      },
+      {
+        "name": "Vegetable Sandwich",
+        "ingredients": [
+          "2 slices bread",
+          "1/2 cup mixed vegetables (lettuce, tomato, cucumber)",
+          "1 tablespoon vegan mayonnaise",
+          "Salt and pepper to taste"
+        ],
+        "instructions": [
+          "Spread vegan mayonnaise on one side of each bread slice.",
+          "Layer the mixed vegetables on one bread slice.",
+          "Season with salt and pepper.",
+          "Top with the other bread slice.",
+          "Cut in half and serve."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "dairy-free"
+        ],
+        "prep_time": 10,
+        "calories": 200
+      }
+    ]
+  },
+  {
+    "date": "2025-03-16",
+    "breakfast": {
+      "name": "Papaya Smoothie with Bread",
+      "ingredients": [
+        "1 cup Papaya (cubed)",
+        "1 cup Non-dairy Milk",
+        "1 slice Bread"
+      ],
+      "instructions": [
+        "1. Blend the papaya cubes with the non-dairy milk until smooth.",
+        "2. Toast the bread slice.",
+        "3. Serve the smoothie in a glass with the toast on the side."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "dairy-free",
+        "nut-free"
+      ],
+      "prep_time": 10,
+      "calories": 300
+    },
+    "lunch": {
+      "name": "Vegetable Tofu Stir-fry",
+      "ingredients": [
+        "200g Tofu (cubed)",
+        "1 cup Mixed Vegetables (carrots, bell peppers)",
+        "2 tbsp Soy Sauce",
+        "1 tbsp Olive Oil",
+        "1 clove Garlic (minced)",
+        "1 slice Bread"
+      ],
+      "instructions": [
+        "1. Heat the olive oil in a pan over medium heat.",
+        "2. Add the minced garlic and saut\u00e9 until fragrant.",
+        "3. Add the mixed vegetables and cook until tender.",
+        "4. Add the cubed tofu and soy sauce, and stir-fry for another 5-7 minutes.",
+        "5. Serve with a slice of bread on the side."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "dairy-free",
+        "nut-free"
+      ],
+      "prep_time": 20,
+      "calories": 500
+    },
+    "dinner": {
+      "name": "Papaya Salsa with Bread",
+      "ingredients": [
+        "1 cup Papaya (diced)",
+        "1 Tomato (diced)",
+        "1/2 Onion (diced)",
+        "1 tbsp Lime Juice",
+        "1 tbsp Olive Oil",
+        "Salt and Pepper to taste",
+        "2 slices Bread"
+      ],
+      "instructions": [
+        "1. In a bowl, combine the diced papaya, tomato, and onion.",
+        "2. Add the lime juice, olive oil, salt, and pepper, and mix well.",
+        "3. Serve the papaya salsa chilled, with toasted bread slices."
+      ],
+      "dietary_tags": [
+        "vegetarian",
+        "dairy-free",
+        "nut-free"
+      ],
+      "prep_time": 15,
+      "calories": 400
+    },
+    "suggested_recipes": [
+      {
+        "name": "Papaya and Biscuit Parfait",
+        "ingredients": [
+          "1 cup Papaya (cubed)",
+          "1 pack Biscuits",
+          "1 cup Non-dairy Yogurt"
+        ],
+        "instructions": [
+          "1. In a glass or bowl, layer the cubed papaya, crumbled biscuits, and non-dairy yogurt.",
+          "2. Repeat the layers until the glass is filled.",
+          "3. Serve immediately."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "dairy-free",
+          "nut-free"
+        ],
+        "prep_time": 10,
+        "calories": 350
+      },
+      {
+        "name": "Papaya Bread Pudding",
+        "ingredients": [
+          "1 cup Papaya (mashed)",
+          "2 slices Bread (cubed)",
+          "1 cup Non-dairy Milk",
+          "1 tbsp Sugar",
+          "1 tsp Vanilla Extract"
+        ],
+        "instructions": [
+          "1. Preheat the oven to 180\u00b0C (350\u00b0F).",
+          "2. In a bowl, combine the mashed papaya, non-dairy milk, sugar, and vanilla extract.",
+          "3. Add the bread cubes and mix until the bread is well coated.",
+          "4. Pour the mixture into a baking dish and bake for 25-30 minutes.",
+          "5. Serve warm."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "dairy-free",
+          "nut-free"
+        ],
+        "prep_time": 40,
+        "calories": 450
+      },
+      {
+        "name": "Vegetable Bread Pizza",
+        "ingredients": [
+          "2 slices Bread",
+          "1 cup Mixed Vegetables (diced)",
+          "1/2 cup Tomato Sauce",
+          "1/2 cup Non-dairy Cheese",
+          "1 tsp Olive Oil"
+        ],
+        "instructions": [
+          "1. Preheat the oven to 200\u00b0C (400\u00b0F).",
+          "2. Place the bread slices on a baking sheet and spread tomato sauce on each slice.",
+          "3. Add the mixed vegetables on top and sprinkle with non-dairy cheese.",
+          "4. Drizzle with olive oil and bake for 10-15 minutes until the cheese is melted.",
+          "5. Serve hot."
+        ],
+        "dietary_tags": [
+          "vegetarian",
+          "dairy-free",
+          "nut-free"
+        ],
+        "prep_time": 20,
+        "calories": 480
+      }
+    ]
+  }
+]
