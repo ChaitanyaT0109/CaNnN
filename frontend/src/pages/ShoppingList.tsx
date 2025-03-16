@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import GlassCard from '../components/ui-elements/GlassCard';
-import { Sparkles, Plus, Minus, Store, Tag, Download, Edit, Trash2, X, Check, Moon, Sun } from 'lucide-react';
+import { Sparkles, Plus, Minus, Store, Tag, Download, Edit, Trash2, X, Check, Moon, Sun, LightbulbIcon } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -65,6 +65,34 @@ const initialShoppingList: ShoppingItem[] = [
     estimatedPrice: 80,
     store: 'Local Market',
   },
+];
+
+// Smart recommendations based on inventory and purchase patterns
+const smartRecommendations = [
+  {
+    id: 'rec1',
+    item: 'Buy milk soon, you\'re almost out',
+    reason: 'Low inventory',
+    priority: 'high',
+  },
+  {
+    id: 'rec2',
+    item: 'Tomatoes are in season at Local Market',
+    reason: 'Seasonal item',
+    priority: 'medium',
+  },
+  {
+    id: 'rec3',
+    item: 'Add vegetable oil to your list',
+    reason: 'Frequently bought with your items',
+    priority: 'medium',
+  },
+  {
+    id: 'rec4',
+    item: 'Onions are 20% off at D-Mart this week',
+    reason: 'Price alert',
+    priority: 'high',
+  }
 ];
 
 // Categories relevant to Indian groceries
@@ -233,6 +261,41 @@ const ShoppingList = () => {
     toast({
       title: "Smart List Generated",
       description: "Common Indian grocery items have been added to your list."
+    });
+  };
+
+  // Function to add recommended item to shopping list
+  const addRecommendedItem = (recommendation: string, store: string = 'Big Bazaar') => {
+    // Simple parsing function to extract item name
+    const itemName = recommendation.includes('Buy') 
+      ? recommendation.split('Buy ')[1].split(',')[0]
+      : recommendation.includes('Add') 
+        ? recommendation.split('Add ')[1].split(' to')[0]
+        : recommendation.split(' are')[0];
+    
+    // Determine category based on item name (simplified)
+    let category = 'Vegetables';
+    if (itemName.toLowerCase().includes('milk') || itemName.toLowerCase().includes('curd')) {
+      category = 'Dairy';
+    } else if (itemName.toLowerCase().includes('oil')) {
+      category = 'Household';
+    }
+    
+    // Create new item
+    const newRecommendedItem: ShoppingItem = {
+      id: generateId(),
+      name: itemName,
+      category: category,
+      quantity: 1,
+      unit: category === 'Dairy' ? 'litre' : 'kg',
+      estimatedPrice: 50, // Default price
+      store: store,
+    };
+    
+    setShoppingList([...shoppingList, newRecommendedItem]);
+    toast({
+      title: "Recommendation Added",
+      description: `${itemName} has been added to your shopping list.`
     });
   };
 
@@ -427,7 +490,43 @@ const ShoppingList = () => {
               </div>
             </div>
             
-            <Button className="w-full">Complete Shopping</Button>
+            {/* New Smart List Section */}
+            <div className="mt-6">
+              <div className="flex items-center gap-2 mb-4">
+                <Sparkles className="h-5 w-5 text-primary" />
+                <h2 className="text-lg font-medium">Smart Suggestions</h2>
+              </div>
+              
+              <div className="space-y-2">
+                {smartRecommendations.map((rec) => (
+                  <div 
+                    key={rec.id} 
+                    className={`p-3 rounded-lg flex items-center justify-between ${
+                      rec.priority === 'high' ? 'bg-blue-100 dark:bg-blue-900/30' : 'bg-secondary'
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-center gap-2">
+                        {rec.priority === 'high' && <div className="w-2 h-2 bg-blue-500 rounded-full"></div>}
+                        <p className="text-sm font-medium">{rec.item}</p>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-1">{rec.reason}</p>
+                    </div>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="h-8"
+                      onClick={() => addRecommendedItem(rec.item)}
+                    >
+                      <Plus className="h-3 w-3 mr-1" />
+                      <span className="text-xs">Add</span>
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <Button className="w-full mt-6">Complete Shopping</Button>
           </GlassCard>
         </div>
       </div>
